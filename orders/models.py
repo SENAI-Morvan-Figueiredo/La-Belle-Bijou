@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import CustomUser
+from accounts.models import CustomUser, Endereco
 from products.models import Produto
 
 # Create your models here.
@@ -17,6 +17,7 @@ class Pedido(models.Model):
     valor_total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    endereco = models.ForeignKey(Endereco, on_delete=models.PROTECT, null=False)
 
     def __str__(self):
         return f"Pedido {self.id} - {self.usuario}"
