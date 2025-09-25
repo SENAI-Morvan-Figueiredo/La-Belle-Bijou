@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labelle Bijou - Login</title>
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+</head>
+<body>
+    <div class="cadastro-container">
+        <div class="logo-side">
+            <div class="logo-content">
+                <h1>Labelle bijou</h1>
+                <p>Entre na sua conta e aproveite nossas ofertas</p>
+            </div>
+        </div>
+        
+        <div class="form-side">
+            <h2>Faça login!</h2>
+            <p class="subtitle">Entre com seus dados abaixo</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Usuário" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            
+            <div class="login-link">
+                Não tem uma conta? <a href="{% url 'cadastro' %}">clique aqui para cadastrar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

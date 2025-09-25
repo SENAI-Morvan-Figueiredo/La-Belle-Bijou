@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labelle Bijou - Cadastro</title>
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+</head>
+<body>
+    <div class="cadastro-container">
+        <!-- Lado esquerdo com logo -->
+        <div class="logo-side">
+            <div class="logo-content">
+                <!-- REMOVIDO: <h1>Labelle bijou</h1> -->
+                <p>Cadastre-se e fique por dentro das nossas ofertas</p>
+            </div>
+        </div>
+        
+        <!-- Lado direito com formulário -->
+        <div class="form-side">
+            <h2>Crie sua conta!</h2>
+            <p class="subtitle">Preencha seus dados abaixo</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="username" placeholder="Nome" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="E-mail" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Senha" required>
+                </div>
+                <button type="submit">Criar conta</button>
+            </form>
+            
+            <div class="login-link">
+                Já tem uma conta? <a href="{% url 'login' %}">clique aqui para entrar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
