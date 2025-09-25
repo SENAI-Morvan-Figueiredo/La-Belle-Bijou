@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView
 from .models import CustomUser
 from .forms import RegisterForm, LoginForm
 from django.urls import reverse_lazy
+from django.shortcuts import render
 
 class RegisterView(CreateView):
     model = CustomUser # model respectivo
@@ -19,5 +20,6 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     next_page = "login"
 
-class Home(CreateView):
-    template_name = "accounts/home.html"
+def home(request):
+    user = request.user
+    return render(request, 'accounts/home.html', {"user": user})

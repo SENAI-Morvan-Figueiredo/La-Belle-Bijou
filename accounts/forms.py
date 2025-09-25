@@ -1,5 +1,6 @@
 from django import forms
 from .models import CustomUser
+from django.contrib.auth.forms import AuthenticationForm
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label='Senha') # define o campo de senha
@@ -35,6 +36,8 @@ class RegisterForm(forms.ModelForm):
         return user # retorna o usuário que acaba de ser criado
 
 
-class LoginForm(forms.Form):
-    email = forms.EmailField(label="Email")
-    password = forms.CharField(widget=forms.PasswordInput, label="Senha")
+class LoginForm(AuthenticationForm):
+    username = forms.EmailField(
+        label="Email",
+        widget=forms.EmailInput(attrs={"autofocus": True})
+    )
