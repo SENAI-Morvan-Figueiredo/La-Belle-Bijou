@@ -18,6 +18,11 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Static
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'la_belle_bijou' / 'static',   # <- registre o diretório do projeto
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -62,7 +67,9 @@ ROOT_URLCONF = 'la_belle_bijou.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR/'la_belle_bijou'/'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -10,4 +10,7 @@ urlpatterns = [
     
     # Logout
     path('logout/', logout_view, name='logout'),
+
+    # Teste de base
+    path('base/', teste)
 ]
