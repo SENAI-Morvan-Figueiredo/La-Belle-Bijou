@@ -7,11 +7,11 @@
 {% else %}
   <button onclick="window.location.href='{% url 'login' %}'">Entrar</button>
 {% endif %}
-{% for produto in produtos %}
+{% for produto in produtos %} <!-- puxa os produtos -->
   <div>
-    {{produto.nome}}
-    {% if produto.imagem_principal %}
-      <img src="{{produto.imagem_principal.url}}" alt="">
+    {{produto.nome}} <!-- nome do produto -->
+    {% if produto.imagem_principal %} <!-- verifica se há imagem -->
+      <img src="{{produto.imagem_principal.url}}" alt=""> <!-- mostra a imagem -->
     {% endif %}
   </div>
 {% endfor %}

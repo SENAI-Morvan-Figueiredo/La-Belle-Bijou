@@ -125,6 +125,14 @@ form {
     margin-bottom: 30px;
 }
 
+.input-group .errorlist {
+    color: #ff6b6b;
+    font-size: 16px;
+    margin-top: 5px;
+    list-style: none;
+    padding: 0;
+}
+
 form input {
     width: 100%;
     padding: 14px 20px;
