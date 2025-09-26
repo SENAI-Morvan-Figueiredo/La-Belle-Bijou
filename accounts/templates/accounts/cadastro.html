@@ -16,7 +16,6 @@
             </div>
         </div>
         
-        
         <!-- Lado direito com formulário -->
         <div class="form-side">
             <h2>Crie sua conta!</h2>
@@ -24,21 +23,28 @@
             
             <form method="post">
                 {% csrf_token %}
+
                 <div class="input-group">
-                    <input type="text" name="nome" placeholder="Nome de usuário" required>
+                    {{ form.username.errors }}
+                    {{ form.username }}
                 </div>
                 <div class="input-group">
-                    <input type="email" name="email" placeholder="E-mail" required>
+                    {{ form.email.errors }}
+                    {{ form.email }}
                 </div>
                 <div class="input-group">
-                    <input type="text" name="cpf" placeholder="CPF" required>
+                    {{ form.cpf.errors }}
+                    {{ form.cpf }}
                 </div>
                 <div class="input-group">
-                    <input type="password" name="senha" placeholder="Senha" required>
+                    {{ form.password.errors }}
+                    {{ form.password }}
                 </div>
                 <div class="input-group">
-                    <input type="password" name="confirmar_senha" placeholder="Confirmar senha" required>
+                    {{ form.password_confirm.errors }}
+                    {{ form.password_confirm }}
                 </div>
+
                 <button type="submit">Criar conta</button>
             </form>
             

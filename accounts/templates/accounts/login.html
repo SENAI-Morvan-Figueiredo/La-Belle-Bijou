@@ -24,16 +24,16 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="input-group">
-                    <input type="email" name="email" placeholder="E-mail" required>
+                    <input type="text" name="username" placeholder="Email" required><br>
                 </div>
                 <div class="input-group">
-                    <input type="password" name="senha" placeholder="Senha" required>
+                    <input type="password" name="password" placeholder="Senha" required><br>
                 </div>
                 <button type="submit">Entrar</button>
             </form>
             
             <div class="login-link">
-                Não tem uma conta? <a href="{% url 'cadastro' %}">clique aqui para cadastrar</a>
+                Não tem uma conta? <a href="{% url 'register' %}">clique aqui para cadastrar</a>
             </div>
         </div>
     </div>

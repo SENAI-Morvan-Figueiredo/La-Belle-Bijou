@@ -9,7 +9,7 @@ from django.shortcuts import render
 class RegisterView(CreateView):
     model = CustomUser # model respectivo
     form_class = RegisterForm # Formulário que será renderizado
-    template_name = "accounts/register.html" # Template que será renderizado
+    template_name = "accounts/cadastro.html" # Template que será renderizado
     success_url = reverse_lazy("login") # Caso o registro dê certo ele redireciona para a tela de login
     
 class CustomLoginView(LoginView):

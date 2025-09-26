@@ -3,8 +3,8 @@ from .models import CustomUser
 from django.contrib.auth.forms import AuthenticationForm
 
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, label='Senha') # define o campo de senha
-    password_confirm = forms.CharField(widget=forms.PasswordInput, label="Confirme a senha") # define o campo de confirmação de senha
+    password = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Senha"}), label='Senha') # define o campo de senha
+    password_confirm = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Confirme a senha"}), label="Confirme a senha") # define o campo de confirmação de senha
 
     class Meta:
         model = CustomUser # define que esse formulário irá criar/editar instâncias da tabela CustomUser
@@ -13,6 +13,11 @@ class RegisterForm(forms.ModelForm):
             "username": "Usuário",
             "cpf": "CPF",
             "email": "E-mail",
+        }
+        widgets = {
+            "username": forms.TextInput(attrs={"placeholder": "Nome de usuário"}),
+            "cpf": forms.TextInput(attrs={"placeholder": "CPF"}),
+            "email": forms.EmailInput(attrs={"placeholder": "E-mail"}),
         }
         help_texts = { # define os textos de apoio para cada campo
             "username": None,
