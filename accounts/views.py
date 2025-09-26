@@ -1,6 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic.edit import CreateView
+from django.views.generic import ListView, CreateView
 from .models import CustomUser
+from products.models import Produto
 from .forms import RegisterForm, LoginForm
 from django.urls import reverse_lazy
 from django.shortcuts import render
@@ -20,6 +21,7 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     next_page = "login"
 
-def home(request):
-    user = request.user
-    return render(request, 'accounts/home.html', {"user": user})
+class Home(ListView):
+    model = Produto
+    template_name = "accounts/home.html"
+    context_object_name = "produtos"
