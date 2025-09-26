@@ -1,0 +1,374 @@
+/* Reset e configurações básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1.4;
+    overflow: hidden;
+}
+
+/* Container principal - TELA CHEIA */
+.cadastro-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+}
+
+/* Lado esquerdo - Logo BRANCO com logo DOURADO */
+.logo-side {
+    flex: 1;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    position: relative;
+}
+
+.logo-side::before {
+    content: '';
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    width: 90%; /* AUMENTADO: era 85% */
+    height: 65%; /* AUMENTADO: era 60% */
+    transform: translate(-50%, -50%);
+    background: url('../img/logo.png') no-repeat center center;
+    background-size: contain;
+    opacity: 1;
+}
+
+.logo-content {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 40%;
+}
+
+.logo-content p {
+    font-size: 2.4rem; /* AUMENTADO: era 2.2rem */
+    opacity: 0.9;
+    line-height: 1.2;
+    font-weight: 500;
+    color: #E0BF77;
+    margin-top: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 0 20px;
+}
+
+/* Lado direito - Formulário (azul escuro) */
+.form-side {
+    flex: 1;
+    padding: 60px 60px;
+    background: #252A36;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-side h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 1px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-side .subtitle {
+    text-align: center;
+    margin-bottom: 40px;
+    opacity: 0.7;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Formulário */
+form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.input-group:last-child {
+    margin-bottom: 30px;
+}
+
+form input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid #3a4150;
+    border-radius: 4px;
+    background: #2c3242;
+    color: #ffffff;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    font-weight: 300;
+    text-align: left;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #5d6d8c;
+    background: #32394b;
+}
+
+form input::placeholder {
+    color: #8a93aa;
+    font-weight: 300;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+form button {
+    width: 100%;
+    padding: 14px;
+    background: #5d6d8c;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+}
+
+form button:hover {
+    background: #6a7b9c;
+}
+
+/* Link de login/cadastro */
+.login-link {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #3a4150;
+    font-size: 1.2rem;
+    color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-link a {
+    color: #8a93aa;
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.2s ease;
+    font-size: 1.2rem;
+}
+
+.login-link a:hover {
+    color: #a0a9c2;
+    text-decoration: underline;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+    .logo-content {
+        max-width: 450px;
+    }
+    
+    .logo-content p {
+        font-size: 2.2rem; /* AUMENTADO: era 2rem */
+    }
+    
+    .logo-side::before {
+        width: 85%; /* Ajuste responsivo */
+        height: 60%; /* Ajuste responsivo */
+    }
+    
+    .form-side {
+        padding: 50px 40px;
+    }
+    
+    .form-side h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+        background: #252A36;
+    }
+    
+    .cadastro-container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .logo-side {
+        padding: 40px 30px;
+        min-height: 35vh;
+        background: #ffffff;
+    }
+    
+    .logo-side::before {
+        width: 85%; /* AUMENTADO: era 80% */
+        height: 75%; /* AUMENTADO: era 70% */
+        top: 30%;
+    }
+    
+    .logo-content {
+        max-width: 100%;
+        margin-top: 35%;
+    }
+    
+    .logo-content p {
+        font-size: 1.9rem; /* AUMENTADO: era 1.7rem */
+        color: #E0BF77;
+        font-weight: 500;
+        margin-top: 5px;
+        line-height: 1.2;
+        padding: 0 15px;
+    }
+    
+    .form-side {
+        padding: 40px 30px;
+        min-height: 65vh;
+        justify-content: flex-start;
+    }
+    
+    .form-side h2 {
+        font-size: 1.8rem;
+    }
+    
+    .form-side .subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    .input-group {
+        margin-bottom: 18px;
+    }
+    
+    form input {
+        font-size: 1.15rem;
+    }
+    
+    form input::placeholder {
+        font-size: 1.05rem;
+    }
+    
+    .login-link {
+        font-size: 1.15rem;
+    }
+    
+    .login-link a {
+        font-size: 1.15rem;
+    }
+    
+    form {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-side {
+        padding: 30px 20px;
+        min-height: 30vh;
+    }
+    
+    .logo-side::before {
+        width: 90%; /* AUMENTADO: era 85% */
+        height: 70%; /* AUMENTADO: era 65% */
+        top: 25%;
+    }
+    
+    .logo-content {
+        margin-top: 30%;
+    }
+    
+    .logo-content p {
+        font-size: 1.6rem; /* AUMENTADO: era 1.4rem */
+        margin-top: 4px;
+        line-height: 1.2;
+        padding: 0 10px;
+    }
+    
+    .form-side {
+        padding: 30px 25px;
+    }
+    
+    .form-side h2 {
+        font-size: 1.6rem;
+    }
+    
+    .form-side .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+    }
+    
+    form input {
+        padding: 12px 16px;
+        font-size: 1.1rem;
+    }
+    
+    form input::placeholder {
+        font-size: 1rem;
+    }
+    
+    form button {
+        padding: 12px;
+        font-size: 1rem;
+    }
+    
+    .input-group {
+        margin-bottom: 16px;
+    }
+    
+    .login-link {
+        font-size: 1.1rem;
+    }
+    
+    .login-link a {
+        font-size: 1.1rem;
+    }
+}
+
+/* Animações */
+.cadastro-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
