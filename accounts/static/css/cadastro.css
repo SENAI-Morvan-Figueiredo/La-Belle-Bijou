@@ -29,8 +29,6 @@ body {
     box-shadow: none;
 }
 
-
-
 /* Lado esquerdo - Logo BRANCO com logo DOURADO */
 .logo-side {
     flex: 1;
@@ -47,8 +45,8 @@ body {
     position: absolute;
     top: 35%;
     left: 50%;
-    width: 85%;
-    height: 60%;
+    width: 90%; /* AUMENTADO: era 85% */
+    height: 65%; /* AUMENTADO: era 60% */
     transform: translate(-50%, -50%);
     background: url('../img/logo.png') no-repeat center center;
     background-size: contain;
@@ -65,7 +63,7 @@ body {
 }
 
 .logo-content p {
-    font-size: 2.2rem;
+    font-size: 2.4rem; /* AUMENTADO: era 2.2rem */
     opacity: 0.9;
     line-height: 1.2;
     font-weight: 500;
@@ -74,7 +72,6 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     padding: 0 20px;
 }
-
 
 /* Lado direito - Formulário (azul escuro) */
 .form-side {
@@ -172,13 +169,13 @@ form button:hover {
     background: #6a7b9c;
 }
 
-/* Link de login */
+/* Link de login/cadastro */
 .login-link {
     text-align: center;
     margin-top: 30px;
     padding-top: 25px;
     border-top: 1px solid #3a4150;
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     color: #ffffff;
     width: 100%;
     max-width: 400px;
@@ -189,7 +186,7 @@ form button:hover {
     text-decoration: none;
     font-weight: 300;
     transition: color 0.2s ease;
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
 }
 
 .login-link a:hover {
@@ -204,7 +201,12 @@ form button:hover {
     }
     
     .logo-content p {
-        font-size: 2rem;
+        font-size: 2.2rem; /* AUMENTADO: era 2rem */
+    }
+    
+    .logo-side::before {
+        width: 85%; /* Ajuste responsivo */
+        height: 60%; /* Ajuste responsivo */
     }
     
     .form-side {
@@ -235,8 +237,8 @@ form button:hover {
     }
     
     .logo-side::before {
-        width: 80%;
-        height: 70%;
+        width: 85%; /* AUMENTADO: era 80% */
+        height: 75%; /* AUMENTADO: era 70% */
         top: 30%;
     }
     
@@ -246,7 +248,7 @@ form button:hover {
     }
     
     .logo-content p {
-        font-size: 1.7rem;
+        font-size: 1.9rem; /* AUMENTADO: era 1.7rem */
         color: #E0BF77;
         font-weight: 500;
         margin-top: 5px;
@@ -282,11 +284,11 @@ form button:hover {
     }
     
     .login-link {
-        font-size: 1.05rem; /* AUMENTADO para mobile */
+        font-size: 1.15rem;
     }
     
     .login-link a {
-        font-size: 1.05rem; /* AUMENTADO para mobile */
+        font-size: 1.15rem;
     }
     
     form {
@@ -301,8 +303,8 @@ form button:hover {
     }
     
     .logo-side::before {
-        width: 85%;
-        height: 65%;
+        width: 90%; /* AUMENTADO: era 85% */
+        height: 70%; /* AUMENTADO: era 65% */
         top: 25%;
     }
     
@@ -311,7 +313,7 @@ form button:hover {
     }
     
     .logo-content p {
-        font-size: 1.4rem;
+        font-size: 1.6rem; /* AUMENTADO: era 1.4rem */
         margin-top: 4px;
         line-height: 1.2;
         padding: 0 10px;
@@ -349,11 +351,11 @@ form button:hover {
     }
     
     .login-link {
-        font-size: 1rem; /* AUMENTADO para mobile pequeno */
+        font-size: 1.1rem;
     }
     
     .login-link a {
-        font-size: 1rem; /* AUMENTADO para mobile pequeno */
+        font-size: 1.1rem;
     }
 }
 

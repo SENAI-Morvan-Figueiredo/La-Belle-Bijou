@@ -40,11 +40,11 @@ def login_view(request):
         
         if user is not None:
             login(request, user)
-            return redirect('pagina_inicial')  # Altere para a página que quiser
+            return redirect('pagina_inicial')
         else:
             messages.error(request, 'Usuário ou senha incorretos!')
     
-    return render(request, 'login.html')
+    return render(request, 'accounts/login.html')  # CORRIGIDO: adicionei 'accounts/'
 
 def logout_view(request):
     logout(request)
