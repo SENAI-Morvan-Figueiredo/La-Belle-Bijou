@@ -1,0 +1,31 @@
+<button onclick="window.location.href='{% url 'home' %}'">Voltar</button>
+<div>
+    {{produto.nome}}
+    {{produto.descricao}}
+    {% for categoria in produto.categorias.all %}
+        <p>{{categoria}}</p>
+    {% endfor %}
+    {% if produto.imagem_principal %}
+        <img src="{{produto.imagem_principal.url}}" alt="" id="imagem-principal" style="width: 200px">
+    {% endif %}
+    R$ {{produto.preco | floatformat:0}}
+</div>
+
+<h3>Outras imagens</h3>
+<div>
+    <!-- Miniatura da principal também -->
+    <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" style="width:50px; cursor:pointer;" onmouseover="mudarImagem(this)">
+    <!-- Miniaturas adicionais -->
+    {% for imagem in produto.imagens.all %}
+        <img src="{{ imagem.imagem.url }}" alt="{{ produto.nome }}" style="width:50px; cursor:pointer;" onmouseover="mudarImagem(this)">
+    {% empty %}
+        <p>Este produto não possui imagens adicionais.</p>
+    {% endfor %}
+</div>
+
+<script>
+    function mudarImagem(elemento) {
+        const imgPrincipal = document.getElementById("imagem-principal");
+        imgPrincipal.src = elemento.src;
+    }
+</script>

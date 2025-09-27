@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from products.views import Home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('accounts.urls')),
-    path('produtos/', include('orders.urls')),
+    path('pedidos/', include('orders.urls')),
+    path('produtos/', include('products.urls')),
+    path("", Home.as_view(), name="home"),
 ]
 
 if settings.DEBUG:

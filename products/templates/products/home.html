@@ -8,7 +8,7 @@
   <button onclick="window.location.href='{% url 'login' %}'">Entrar</button>
 {% endif %}
 {% for produto in produtos %} <!-- puxa os produtos -->
-  <div>
+  <div onclick="window.location.href='{% url 'detail-produto' produto.pk %}'">
     {{produto.nome}} <!-- nome do produto -->
     {% if produto.imagem_principal %} <!-- verifica se há imagem -->
       <img src="{{produto.imagem_principal.url}}" alt=""> <!-- mostra a imagem -->
