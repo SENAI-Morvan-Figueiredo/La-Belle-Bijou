@@ -1,0 +1,108 @@
+<form method="post" enctype="multipart/form-data"> {# cria um formulário tipo post (enctype="multipart/form-data" é necessário quando o formulário contém uploads de imagens) #}
+    {% csrf_token %}
+    {{ form.as_p }} {# cria o form passado pela view sem o formset com as imagens secundárias #}
+
+    <h4>Imagens adicionais</h4>
+
+    {# management form obrigatório para o formset que gera inputs ocultos #}
+    {{ formset.management_form }}
+
+    <div id="formset-container">
+        {# forms já existentes (ou os extras que vieram do server) #}
+        {% for f in formset %}
+            <div class="formset-form">
+                {# Renderiza os campos hidden (inclui id e DELETE quando aplicável) serve para garantir que esses campos sejam enviados quando o form for submetido #}
+                {% for hidden in f.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+
+                {# Renderiza apenas o campo de imagem (evita usar f.as_p que renderiza DELETE visível) #}
+                <div class="form-row">
+                    {{ f.imagem.label_tag }} {{ f.imagem }}
+                </div>
+
+                <button type="button" class="remove-form">🗑️</button>
+            </div>
+        {% endfor %}
+    </div>
+
+    {# empty_form escondido: template que é usado para clonar #}
+    <div id="empty-form" style="display:none;">
+        <div class="formset-form">
+            
+            {% for hidden in formset.empty_form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            <div class="form-row">
+                {{ formset.empty_form.imagem.label_tag }} {{ formset.empty_form.imagem }}
+            </div>
+
+            {# Caso o empty_form não contenha explicitamente DELETE como hidden, garante um hidden DELETE #}
+            <input type="hidden" name="{{ formset.prefix }}-__prefix__-DELETE"
+                   id="id_{{ formset.prefix }}-__prefix__-DELETE" value="">
+            <button type="button" class="remove-form">🗑️</button>
+        </div>
+    </div>
+
+    <button type="button" id="add-form">+ Adicionar imagem</button>
+    <br><br>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const container = document.getElementById("formset-container");
+    const addBtn = document.getElementById("add-form");
+    const emptyFormHtml = document.getElementById("empty-form").innerHTML;
+    // ID do TOTAL_FORMS — usa o prefix do formset gerado pelo Django
+    const totalFormsInput = document.getElementById("id_{{ formset.prefix }}-TOTAL_FORMS");
+
+    // Função para reaplicar eventos de remoção a todos os botões existentes
+    function attachRemoveEvents() {
+        container.querySelectorAll(".remove-form").forEach(button => {
+            // Evita duplicar handlers
+            button.onclick = function() {
+                const formDiv = this.closest(".formset-form");
+
+                // Tenta localizar um input DELETE (pode ser hidden)
+                const deleteInput = formDiv.querySelector("input[name$='-DELETE']");
+
+                if (deleteInput) {
+                    // Marca para deleção no backend (valor "on" é interpretado pelo Django)
+                    deleteInput.value = "on";
+                    // Esconde o form do frontend (a visita seguinte continuará com o mark)
+                    formDiv.style.display = "none";
+                } else {
+                    // Se não houver input DELETE (form recém-adicionado), remove do DOM
+                    formDiv.remove();
+                    // Atualiza TOTAL_FORMS para refletir remoção de form não-salvo
+                    totalFormsInput.value = container.querySelectorAll(".formset-form").length;
+                }
+            };
+        });
+    }
+
+    // Adiciona novo form com base no empty_form (substitui __prefix__ pelo índice atual)
+    addBtn.addEventListener("click", function() {
+        const formIndex = parseInt(totalFormsInput.value, 10);
+        // Substitui todos os __prefix__ pelo índice corrente
+        const newFormHtml = emptyFormHtml.replace(/__prefix__/g, formIndex);
+
+        // Cria um nó temporário e insere o novo form
+        const temp = document.createElement("div");
+        temp.innerHTML = newFormHtml.trim();
+        const newFormDiv = temp.firstElementChild;
+        container.appendChild(newFormDiv);
+
+        // Incrementa TOTAL_FORMS
+        totalFormsInput.value = formIndex + 1;
+
+        // Reaplica os eventos de remoção (pro botão do novo form também)
+        attachRemoveEvents();
+    });
+
+    // inicializa os handlers ao carregar
+    attachRemoveEvents();
+});
+</script>

@@ -22,6 +22,7 @@ from products.views import Home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('adm/', include('dashboard.urls')),
     path('user/', include('accounts.urls')),
     path('pedidos/', include('orders.urls')),
     path('produtos/', include('products.urls')),

@@ -15,7 +15,12 @@ class LoginView(LoginView):
     template_name = "accounts/login.html"
     authentication_form = LoginForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy("home")
+    
+    def get_success_url(self):
+        user = self.request.user
+        if user.is_superuser or user.is_staff:  # se for admin
+            return reverse_lazy("produtos-adm")  # manda para dashboard admin
+        return reverse_lazy("home")  # manda para home normal
 
 class LogoutView(LogoutView):
     next_page = "login"
