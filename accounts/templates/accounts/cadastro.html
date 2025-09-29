@@ -12,10 +12,10 @@
         <!-- Lado esquerdo com logo -->
         <div class="logo-side">
             <div class="logo-content">
-                <!-- REMOVIDO: <h1>Labelle bijou</h1> -->
                 <p>Cadastre-se e fique por dentro das nossas ofertas</p>
             </div>
         </div>
+        
         
         <!-- Lado direito com formulário -->
         <div class="form-side">
@@ -25,13 +25,19 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="input-group">
-                    <input type="text" name="username" placeholder="Nome" required>
+                    <input type="text" name="nome" placeholder="Nome de usuário" required>
                 </div>
                 <div class="input-group">
                     <input type="email" name="email" placeholder="E-mail" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" name="password" placeholder="Senha" required>
+                    <input type="text" name="cpf" placeholder="CPF" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="senha" placeholder="Senha" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="confirmar_senha" placeholder="Confirmar senha" required>
                 </div>
                 <button type="submit">Criar conta</button>
             </form>
