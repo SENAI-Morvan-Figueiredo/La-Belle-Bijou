@@ -3,13 +3,19 @@ from products.models import Produto
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .forms import ProdutoForm, ImagemProdutoFormSet
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
-class ListaProdutosAdm(ListView): 
+
+class ListaProdutosAdm(LoginRequiredMixin, UserPassesTestMixin, ListView): 
     model = Produto 
     template_name = "dashboard/adm_produto.html" 
     context_object_name = "produtos"
 
-class CriarProduto(CreateView): # view para criação de produtos
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class CriarProduto(LoginRequiredMixin, UserPassesTestMixin, CreateView): # view para criação de produtos
     model = Produto
     form_class = ProdutoForm # formulário a ser renderizado
     template_name = "dashboard/criar_produto.html"
@@ -34,7 +40,11 @@ class CriarProduto(CreateView): # view para criação de produtos
         else:
             return self.form_invalid(form) # se não for válido chama a função com os erros dos formulários
         
-class UpdateProduto(UpdateView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class UpdateProduto(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Produto
     form_class = ProdutoForm
     template_name = "dashboard/criar_produto.html"
@@ -66,8 +76,15 @@ class UpdateProduto(UpdateView):
             return redirect("produtos-adm")
         else:
             return self.form_invalid(form)
-        
-class DeletarProduto(DeleteView):
+    
+    def test_func(self):
+        return self.request.user.is_superuser
+
+  
+class DeletarProduto(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Produto
     template_name = "dashboard/deletar_produto.html" 
     success_url = reverse_lazy("produtos-adm")
+
+    def test_func(self):
+        return self.request.user.is_superuser
