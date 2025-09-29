@@ -1,0 +1,9 @@
+<div class="container mt-5">
+  <h2>Tem certeza que deseja excluir o produto "{{ object.nome }}"?</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Excluir</button>
+    <a href="{% url 'categorias-adm' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>

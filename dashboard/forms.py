@@ -1,7 +1,7 @@
 from django import forms
 from django.forms.models import inlineformset_factory
 from django.forms.widgets import ClearableFileInput
-from products.models import Produto, ImagemProduto
+from products.models import Produto, ImagemProduto, Categoria
 
 class CustomClearableFileInput(ClearableFileInput):
     initial_text = "Imagem atual"
@@ -30,3 +30,9 @@ ImagemProdutoFormSet = inlineformset_factory( # cria um formset (conjunto de for
     can_delete=True,
     widgets={"imagem": CustomClearableFileInput},
 )
+
+
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ["nome",]

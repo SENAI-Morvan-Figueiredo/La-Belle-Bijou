@@ -1,0 +1,10 @@
+<h1>Painel - Lista de Categorias</h1>
+<ul>
+    {% for categoria in categorias %}
+        <li>{{ categoria.nome }}</li>
+        <button onclick="window.location.href='{% url 'upd-categoria' categoria.pk %}'">editar</button>
+        <button onclick="window.location.href='{% url 'deletar-categoria' categoria.pk %}'">excluir</button>
+     {% endfor %}
+</ul>
+
+<button onclick="window.location.href='{% url 'add-categoria' %}'">Criar Categoria</button>

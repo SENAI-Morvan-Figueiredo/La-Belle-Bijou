@@ -1,8 +1,8 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from products.models import Produto 
+from products.models import Produto, Categoria
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .forms import ProdutoForm, ImagemProdutoFormSet
+from .forms import ProdutoForm, ImagemProdutoFormSet, CategoriaForm
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
@@ -85,6 +85,40 @@ class DeletarProduto(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Produto
     template_name = "dashboard/deletar_produto.html" 
     success_url = reverse_lazy("produtos-adm")
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+class ListarCategorias(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = Categoria
+    template_name = "dashboard/adm_categoria.html"
+    context_object_name = "categorias"
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+class CriarCategoria(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Categoria
+    template_name = "dashboard/criar_categoria.html"
+    form_class = CategoriaForm
+    success_url = reverse_lazy("categorias-adm")
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+class UpdateCategoria(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Categoria
+    template_name = "dashboard/criar_categoria.html"
+    form_class = CategoriaForm
+    success_url = reverse_lazy("categorias-adm")
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+class DeletarCategoria(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Categoria
+    template_name = "dashboard/deletar_categoria.html" 
+    success_url = reverse_lazy("categorias-adm")
 
     def test_func(self):
         return self.request.user.is_superuser

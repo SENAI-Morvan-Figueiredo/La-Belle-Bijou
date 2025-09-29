@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
+    telefone = models.CharField(null=True, max_length=15)
     cpf = models.CharField(max_length=11, unique=True)
     data_nasc = models.DateField(null=True, blank=True)
 
