@@ -1,0 +1,121 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block title %}La Belle Bijou - Editar Perfil{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/editar_perfil.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="editar-perfil">
+    <div class="container">
+        <h1 class="titulo">Editor Perfil</h1>
+        
+        <form class="formulario-perfil" method="post">
+            {% csrf_token %}
+            
+            <section class="secao">
+                <h2 class="subtitulo">Informações pessoais</h2>
+                
+                <div class="campo-grupo">
+                    <div class="campo">
+                        <label for="{{ form.first_name.id_for_label }}">Nome completo</label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}
+                            <div class="erro">{{ form.first_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="{{ form.phone_number.id_for_label }}">Número de telefone</label>
+                        {{ form.phone_number }}
+                        {% if form.phone_number.errors %}
+                            <div class="erro">{{ form.phone_number.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="campo">
+                    <label for="{{ form.email.id_for_label }}">E-mail</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="erro">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+            </section>
+            
+            <section class="secao">
+                <h2 class="subtitulo">Endereço de entrega</h2>
+                
+                <div class="campo-grupo">
+                    <div class="campo">
+                        <label for="{{ form.rua.id_for_label }}">Rua</label>
+                        {{ form.rua }}
+                        {% if form.rua.errors %}
+                            <div class="erro">{{ form.rua.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="{{ form.numero.id_for_label }}">Número</label>
+                        {{ form.numero }}
+                        {% if form.numero.errors %}
+                            <div class="erro">{{ form.numero.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="campo-grupo">
+                    <div class="campo">
+                        <label for="{{ form.complemento.id_for_label }}">Complemento</label>
+                        {{ form.complemento }}
+                        {% if form.complemento.errors %}
+                            <div class="erro">{{ form.complemento.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="{{ form.cep.id_for_label }}">CEP</label>
+                        {{ form.cep }}
+                        {% if form.cep.errors %}
+                            <div class="erro">{{ form.cep.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="campo-grupo">
+                    <div class="campo">
+                        <label for="{{ form.bairro.id_for_label }}">Bairro</label>
+                        {{ form.bairro }}
+                        {% if form.bairro.errors %}
+                            <div class="erro">{{ form.bairro.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="{{ form.cidade.id_for_label }}">Cidade</label>
+                        {{ form.cidade }}
+                        {% if form.cidade.errors %}
+                            <div class="erro">{{ form.cidade.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="{{ form.estado.id_for_label }}">Estado (sigla)</label>
+                        {{ form.estado }}
+                        {% if form.estado.errors %}
+                            <div class="erro">{{ form.estado.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            
+            <div class="botoes">
+                <button type="button" class="botao-voltar" onclick="history.back()">Voltar</button>
+                <button type="submit" class="botao-salvar">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
