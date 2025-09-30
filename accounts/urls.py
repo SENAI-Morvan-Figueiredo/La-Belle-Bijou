@@ -6,4 +6,7 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("profile/", ProfileView.as_view(), name="profile"),  # Nova URL para edição de perfil
+
+    # Teste de base
+    path('base/', teste)
 ]

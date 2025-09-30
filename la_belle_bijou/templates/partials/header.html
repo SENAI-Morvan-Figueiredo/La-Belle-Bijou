@@ -1,0 +1,19 @@
+{% load static %}
+<header>
+    <a href=""><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
+    <div class="links">
+        <a href="">Início</a>
+        <a href="">Joias</a>
+        <a href="">Colares</a>
+        <a href="">Pulseiras</a>
+        <a href="">Piercing</a>
+    </div>
+    <div class="icones">
+        {% if not user.is_authenticated %}
+        <a href="" id="bCadastro">Cadastro</a>
+        <a href="" id="bEntrar">Entrar</a>
+        {% endif %}
+        <a href=""><img src="{% static 'img/carrinho.png' %}" alt="Carrinho" class="bCarrinho"></a>
+        <a href=""><img src="{% static 'img/perfil.png' %}" alt="Perfil" class="bPerfil"></a>
+    </div>
+</header>

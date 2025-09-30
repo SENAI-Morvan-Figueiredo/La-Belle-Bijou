@@ -34,3 +34,6 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     
     def get_object(self):
         return self.request.user
+
+def teste(request):
+    return render(request, 'accounts/teste.html')
