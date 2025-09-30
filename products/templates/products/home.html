@@ -1,4 +1,4 @@
-{% extends 'products/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}La Belle Bijou - Home{% endblock %}
@@ -10,6 +10,10 @@
 {% block conteudo %}
 <div class="home-content">
     {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">logout</button>
+        </form>
         <div class="welcome-message">
             <h1>Teste de {{ user.username }}</h1>
         </div>

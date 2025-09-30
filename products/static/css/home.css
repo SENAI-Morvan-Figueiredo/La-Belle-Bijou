@@ -61,3 +61,8 @@
     font-weight: bold;
     margin: 0;
 }
+
+footer {
+    position: absolute;
+    bottom: 0;
+}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}La Belle Bijou - Editar Perfil{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/editar_perfil.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="editar-perfil">
+    <div class="container">
+        <h1 class="titulo">Editor Perfil</h1>
+        
+        <form class="formulario-perfil" method="post">
+            {% csrf_token %}
+            
+            <section class="secao">
+                <h2 class="subtitulo">Informações pessoais</h2>
+                
+                <div class="campo-grupo">
+                    <div class="campo">
+                        <label for="{{ form.first_name.id_for_label }}">Primeiro Nome</label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}
+                            <div class="erro">{{ form.first_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="{{ form.last_name.id_for_label }}">Sobrenome</label>
+                        {{ form.last_name }}
+                        {% if form.last_name.errors %}
+                            <div class="erro">{{ form.last_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="campo-grupo">
+                    <div class="campo">
+                        <label for="{{ form.email.id_for_label }}">E-mail</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="erro">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="campo">
+                        <label for="{{ form.telefone.id_for_label }}">Número de telefone</label>
+                        {{ form.telefone }}
+                        {% if form.telefone.errors %}
+                            <div class="erro">{{ form.telefone.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <div class="campo">
+                        <label for="{{ form.cpf.id_for_label }}">CPF</label>
+                        {{ form.cpf }}
+                        {% if form.cpf.errors %}
+                            <div class="erro">{{ form.cpf.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="campo">
+                        <label for="{{ form.data_nasc.id_for_label }}">Data de nascimento</label>
+                        {{ form.data_nasc }}
+                        {% if form.data_nasc.errors %}
+                            <div class="erro">{{ form.data_nasc.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+            
+            <div class="botoes">
+                <button type="button" class="botao-voltar" onclick="history.back()">Voltar</button>
+                <button type="submit" class="botao-salvar">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
