@@ -1,10 +1,13 @@
 <h1>Painel - Lista de Produtos</h1>
 <ul>
     {% for produto in produtos %}
-        <li>{{ produto.nome }} - R$ {{ produto.preco }}</li>
+        <li>{{ produto.nome }} - R$ {{ produto.preco }} || Estoque: {{produto.estoque_atual}}</li>
         <button onclick="window.location.href='{% url 'upd-produto' produto.pk %}'">editar</button>
         <button onclick="window.location.href='{% url 'deletar-produto' produto.pk %}'">excluir</button>
      {% endfor %}
 </ul>
 
 <button onclick="window.location.href='{% url 'add-produto' %}'">Criar Produto</button>
+
+<button onclick="window.location.href='{% url 'add-entrada' %}'">Adicionar Entrada</button>
+<button onclick="window.location.href='{% url 'add-saida' %}'">Adicionar Saída</button>

@@ -1,8 +1,8 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from products.models import Produto, Categoria
+from products.models import Produto, Categoria, MovimentacaoEstoque
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .forms import ProdutoForm, ImagemProdutoFormSet, CategoriaForm
+from .forms import ProdutoForm, ImagemProdutoFormSet, CategoriaForm, MovimentacaoEstoqueForm
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
@@ -120,5 +120,57 @@ class DeletarCategoria(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = "dashboard/deletar_categoria.html" 
     success_url = reverse_lazy("categorias-adm")
 
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Estoque =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+class EntradaCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = MovimentacaoEstoque
+    form_class = MovimentacaoEstoqueForm
+    template_name = "dashboard/movimentacao_estoque.html"
+    success_url = reverse_lazy("produtos-adm")
+
+    def get_form_kwargs(self): # função padrão do django que manda o dicionario(kwargs) com todas as informações para iniciar o form
+        kwargs = super().get_form_kwargs() # puxa o método da classe mãe(CreateView) que retorna todas as informações necessárias para iniciar o form
+        kwargs["tipo_movimentacao"] = "entrada" # adiciona o campo "tipo_movimentação = saida" no kwargs
+        return kwargs # manda o kwargs atualizado para o form
+
+    def get_context_data(self, **kwargs): # função padrão do django que manda o dicionario(kwargs) com todas as informações a serem usadas no template
+        context = super().get_context_data(**kwargs) # puxa o método da classe mãe(CreateView) que retorna todas as informações necessárias para para o template
+        context["tipo_movimentacao"] = "entrada" # adiciona o campo "tipo_movimentação = saida" no context
+        return context # manda o context atualizado para o template
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        form.instance.tipo = "ENTRADA"
+        return super().form_valid(form)
+    
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class SaidaCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = MovimentacaoEstoque
+    form_class = MovimentacaoEstoqueForm
+    template_name = "dashboard/movimentacao_estoque.html"
+    success_url = reverse_lazy("produtos-adm")
+
+    def get_form_kwargs(self): # função padrão do django que manda o dicionario(kwargs) com todas as informações para iniciar o form
+        kwargs = super().get_form_kwargs() # puxa o método da classe mãe(CreateView) que retorna todas as informações necessárias para iniciar o form
+        kwargs["tipo_movimentacao"] = "saida" # adiciona o campo "tipo_movimentação = saida" no kwargs
+        return kwargs # manda o kwargs atualizado para o form
+
+    def get_context_data(self, **kwargs): # função padrão do django que manda o dicionario(kwargs) com todas as informações a serem usadas no template
+        context = super().get_context_data(**kwargs) # puxa o método da classe mãe(CreateView) que retorna todas as informações necessárias para para o template
+        context["tipo_movimentacao"] = "saida" # adiciona o campo "tipo_movimentação = saida" no context
+        return context # manda o context atualizado para o template
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        form.instance.tipo = "SAIDA"
+        return super().form_valid(form)
+    
     def test_func(self):
         return self.request.user.is_superuser
