@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import CustomUser
 from .forms import RegisterForm, LoginForm, ProfileForm
+from django.shortcuts import render
 
 class RegisterView(CreateView):
     model = CustomUser
