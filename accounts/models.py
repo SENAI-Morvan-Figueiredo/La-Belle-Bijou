@@ -6,6 +6,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     cpf = models.CharField(max_length=11, unique=True)
     data_nasc = models.DateField(null=True, blank=True)
+    telefone = models.CharField(null=True, max_length=15)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username", "cpf"]

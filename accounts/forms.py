@@ -49,100 +49,12 @@ class LoginForm(AuthenticationForm):
 # Novo formulário para edição de perfil
 class ProfileForm(forms.ModelForm):
     # Campos do usuário
-    phone_number = forms.CharField(
-        max_length=20, 
-        required=False, 
-        label="Número de telefone",
-        widget=forms.TextInput(attrs={'placeholder': 'Número de telefone'})
-    )
-    
-    # Campos de endereço
-    rua = forms.CharField(
-        max_length=255, 
-        required=False, 
-        label="Rua",
-        widget=forms.TextInput(attrs={'placeholder': 'Rua'})
-    )
-    numero = forms.CharField(
-        max_length=10, 
-        required=False, 
-        label="Número",
-        widget=forms.TextInput(attrs={'placeholder': 'Número'})
-    )
-    complemento = forms.CharField(
-        max_length=255, 
-        required=False, 
-        label="Complemento",
-        widget=forms.TextInput(attrs={'placeholder': 'Complemento'})
-    )
-    cep = forms.CharField(
-        max_length=9, 
-        required=False, 
-        label="CEP",
-        widget=forms.TextInput(attrs={'placeholder': 'CEP'})
-    )
-    bairro = forms.CharField(
-        max_length=100, 
-        required=False, 
-        label="Bairro",
-        widget=forms.TextInput(attrs={'placeholder': 'Bairro'})
-    )
-    cidade = forms.CharField(
-        max_length=100, 
-        required=False, 
-        label="Cidade",
-        widget=forms.TextInput(attrs={'placeholder': 'Cidade'})
-    )
-    estado = forms.CharField(
-        max_length=2, 
-        required=False, 
-        label="Estado (sigla)",
-        widget=forms.TextInput(attrs={'placeholder': 'Estado (sigla)', 'maxlength': '2'})
-    )
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 'telefone', 'data_nasc', 'cpf']
         labels = {
             'first_name': 'Nome',
             'last_name': 'Sobrenome',
+            'data_nasc': 'Data de nascimento',
         }
-        widgets = {
-            'first_name': forms.TextInput(attrs={'placeholder': 'Nome'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Sobrenome'}),
-            'email': forms.EmailInput(attrs={'placeholder': 'E-mail'}),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Preencher os campos com dados existentes
-        if self.instance and self.instance.enderecos.exists():
-            endereco = self.instance.enderecos.first()
-            self.fields['rua'].initial = endereco.rua
-            self.fields['numero'].initial = endereco.numero
-            self.fields['complemento'].initial = endereco.complemento
-            self.fields['cep'].initial = endereco.cep
-
-    def save(self, commit=True):
-        user = super().save(commit=commit)
-        
-        # Salvar ou atualizar o endereço
-        if commit:
-            endereco_data = {
-                'rua': self.cleaned_data.get('rua', ''),
-                'numero': self.cleaned_data.get('numero', ''),
-                'complemento': self.cleaned_data.get('complemento', ''),
-                'cep': self.cleaned_data.get('cep', ''),
-            }
-            
-            if user.enderecos.exists():
-                # Atualizar endereço existente
-                endereco = user.enderecos.first()
-                for field, value in endereco_data.items():
-                    setattr(endereco, field, value)
-                endereco.save()
-            else:
-                # Criar novo endereço
-                Endereco.objects.create(usuario=user, **endereco_data)
-        
-        return user
