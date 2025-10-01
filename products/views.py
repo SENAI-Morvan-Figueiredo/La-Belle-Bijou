@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Produto
+from django.views.generic import TemplateView
+
+class CarrinhoVazio(TemplateView):
+    template_name = 'products/vazio.html'
 
 # Create your views here.
 class Home(ListView):

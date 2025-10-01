@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meu Carrinho - La Belle Bijou{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/vazio.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="empty-cart-container">
+    <h1>MEU CARRINHO</h1>
+    <div class="empty-cart-image">
+        <img src="{% static 'img/vazio.png' %}" alt="Carrinho vazio" class="cart-icon">
+    </div>
+    <p class="empty-message">Seu carrinho está vazio!</p>
+    <a href="{% url 'home' %}" class="back-button">Voltar</a>
+</div>
+{% endblock %}
