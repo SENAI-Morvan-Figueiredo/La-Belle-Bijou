@@ -20,17 +20,33 @@
 }
 
 .produto-imagem {
-    width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center; /* centraliza verticalmente */
+    gap: 1rem; /* espaçamento entre as imagens */
 }
 
-.produto-imagem img {
-    width: 100%;
-    height: 480px; /* Aumentado de 450px para 480px */
+.imagens-secundarias {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza as miniaturas */
+    gap: 0.5rem;
+}
+
+.imagens-secundarias img {
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    display: block;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.2s ease;
+}
+
+.imagem-principal img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 .produto-info {

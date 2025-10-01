@@ -11,12 +11,27 @@
         <div class="produto-content">
             <!-- Imagem do produto -->
             <div class="produto-imagem">
-                {% if produto.imagem_principal %}
-                    <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
-                {% else %}
-                    <img src="{% static 'img/produto-placeholder.jpg' %}" alt="Imagem não disponível">
-                {% endif %}
+                <div class="imagens-secundarias">
+                    {% if produto.imagem_principal %}
+                        <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" onmouseover="mudarImagem(this)">
+                    {% else %}
+                        <img src="{% static 'img/produto-placeholder.jpg' %}" alt="Imagem não disponível">
+                    {% endif %}
+                    {% for imagem in produto.imagens.all %}
+                        <img src="{{ imagem.imagem.url }}" alt="{{ produto.nome }}" onmouseover="mudarImagem(this)" onmouseout="voltarImagem()">
+                    {% empty %}
+                    {% endfor %}
+                </div>
+
+                <div class="imagem-principal">
+                    {% if produto.imagem_principal %}
+                        <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" id="imagem-principal">
+                    {% else %}
+                        <img src="{% static 'img/produto-placeholder.jpg' %}" alt="Imagem não disponível">
+                    {% endif %}
+                </div>
             </div>
+
 
             <!-- Informações do produto -->
             <div class="produto-info">
@@ -40,16 +55,20 @@
 
                 <!-- Ações -->
                 <div class="produto-acoes">
-                    <button class="btn-adicionar-carrinho">
+                    <button onclick="window.location.href='{% url 'adicionar_carrinho' produto.id %}'" class="btn-adicionar-carrinho">
                         Adicionar ao carrinho
                     </button>
                     
-                    <a href="#" class="btn-ver-carrinho">
-                        Ver carrinho
+                    <a href="{% url 'ver_carrinho' %}" class="btn-ver-carrinho">
+                    Ver carrinho
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/produto.js' %}"></script>
 {% endblock %}
