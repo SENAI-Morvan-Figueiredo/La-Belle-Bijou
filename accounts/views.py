@@ -1,15 +1,16 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 from .models import CustomUser
+from .forms import RegisterForm, LoginForm
+from django.urls import reverse_lazy
 from .forms import RegisterForm, LoginForm, ProfileForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class RegisterView(CreateView):
-    model = CustomUser
-    form_class = RegisterForm
-    template_name = "accounts/cadastro.html"
-    success_url = reverse_lazy("login")
+    model = CustomUser # model respectivo
+    form_class = RegisterForm # Formulário que será renderizado
+    template_name = "accounts/cadastro.html" # Template que será renderizado
+    success_url = reverse_lazy("login") # Caso o registro dê certo ele redireciona para a tela de login
     
 class LoginView(LoginView):
     template_name = "accounts/login.html"
@@ -18,9 +19,9 @@ class LoginView(LoginView):
     
     def get_success_url(self):
         user = self.request.user
-        if user.is_superuser or user.is_staff:
-            return reverse_lazy("produtos-adm")
-        return reverse_lazy("home")
+        if user.is_superuser or user.is_staff:  # se for admin
+            return reverse_lazy("produtos-adm")  # manda para dashboard admin
+        return reverse_lazy("home")  # manda para home normal
 
 class LogoutView(LogoutView):
     next_page = "login"
