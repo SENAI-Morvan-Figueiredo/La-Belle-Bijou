@@ -1,0 +1,175 @@
+/* Resets e Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Alata', sans-serif !important;
+
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(37, 42, 54, 1);
+    color: #333;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Estrutura Principal do Painel */
+.admin-panel {
+    display: flex;
+    width: 100%;
+}
+
+/* Barra Lateral */
+.sidebar {
+    width: 300px;
+    background-color: rgba(37, 42, 54, 1);
+    color: #fdfdfd;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #E0C097;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .welcome-message {
+    font-size: 14px;
+    text-align: center;
+    color: #d6d6d6;
+    margin-bottom: 35px;
+}
+
+/* Navegação */
+.navigation ul {
+    list-style: none;
+    background-color: rgba(36, 39, 51, 1);
+}
+
+.navigation ul li a {
+    display: block;
+    padding: 15px 10px;
+    color: #fdfdfd;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation ul li a:hover {
+    background-color: #2d3b50;
+}
+
+.navigation ul li a.active {
+    background-color: #D4AC6E;
+    color: #202A3A;
+    font-weight: 500;
+}
+
+.navigation ul li.divider {
+    padding: 20px 0;
+}
+.navigation ul li.divider hr {
+    border: none;
+    border-top: 1px solid #3a4a63;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header h1 {
+    font-size: 32px;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+}
+
+.main-header p {
+    color: #ABABAB;
+    margin-top: 5px;
+}
+
+/* Barra de Ferramentas (Busca e Botão) */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    position: relative;
+    width: 40%;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px 12px 12px 40px; /* Espaço para o ícone */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236c757d" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 12px center;
+}
+
+.add-button {
+    background-color: #D4AC6E;
+    color: #202A3A;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #c89f5e;
+}
+
+.add-button span {
+    font-size: 20px;
+    line-height: 1;
+}
+
+
+/* conteudo */
+.content-area {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* rodape */
+.main-footer {
+    text-align: center;
+    padding-top: 30px;
+    font-size: 13px;
+    color: #6c757d;
+}
+
+
+.admin-panel .sidebar .logo img {
+    max-width: 50%;
+    height: auto;
+    margin-bottom: 10px;
+}
