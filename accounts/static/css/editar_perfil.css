@@ -1,0 +1,178 @@
+/* editar_perfil.css */
+
+body {
+    font-family: "Alata", sans-serif;
+    background-color: #fff;
+    color: #252A36;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    width: 100%;
+    padding: 2rem 0;
+}
+
+.editar-perfil {
+    width: 100%;
+    min-height: calc(100vh - 15vh - 24vh); /* Altura total - header - footer */
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.titulo {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #252A36;
+    font-weight: normal;
+}
+
+.formulario-perfil {
+    background-color: #fff;
+    padding: 0;
+}
+
+.secao {
+    margin-bottom: 2.5rem;
+}
+
+.subtitulo {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #252A36;
+    font-weight: normal;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.campo {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: normal;
+}
+
+.campo input {
+    padding: 0.75rem;
+    border: 1px solid #CECECE;
+    border-radius: 4px;
+    font-family: "Alata", sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background-color: #fff;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: #252A36;
+}
+
+.erro {
+    color: #ff0000;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    gap: 1rem;
+    padding-bottom: 2rem; /* Espaço extra antes do footer */
+}
+
+.botao-voltar, .botao-salvar {
+    padding: 0.75rem 2rem;
+    border: 2px solid #252A36;
+    border-radius: 4px;
+    font-family: "Alata", sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+    max-width: 200px;
+}
+
+.botao-voltar {
+    background-color: #fff;
+    color: #252A36;
+}
+
+.botao-voltar:hover {
+    background-color: #f0f0f0;
+}
+
+.botao-salvar {
+    background-color: #252A36;
+    color: #fff;
+}
+
+.botao-salvar:hover {
+    background-color: #3a3f4d;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 20vh;
+    }
+    
+    .editar-perfil {
+        min-height: calc(100vh - 15vh - 20vh);
+    }
+    
+    .campo-grupo {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .campo {
+        min-width: 100%;
+    }
+    
+    .botoes {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .botao-voltar, .botao-salvar {
+        width: 100%;
+        max-width: none;
+    }
+    
+    footer {
+        height: 20vh;
+    }
+    
+    .conteudo-footer {
+        height: 14vh;
+    }
+}

@@ -1,0 +1,68 @@
+/* home.css */
+.home-content {
+    padding: 2rem 0;
+    min-height: calc(100vh - 15vh - 24vh);
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.welcome-message h1 {
+    color: #252A36;
+    font-weight: normal;
+    font-size: 1.5rem;
+}
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.produto-card {
+    border: 1px solid #CECECE;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background-color: #fff;
+}
+
+.produto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #252A36;
+}
+
+.produto-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.produto-card h3 {
+    color: #252A36;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    font-size: 1.1rem;
+}
+
+.preco {
+    font-size: 1.2rem;
+    color: #252A36;
+    font-weight: bold;
+    margin: 0;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}

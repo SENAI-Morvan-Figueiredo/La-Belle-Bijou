@@ -1,17 +1,36 @@
-{% if user.is_authenticated %}
-  <h1>Salve {{user.username}}</h2>
-  <form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit">Sair</button>
-</form>
-{% else %}
-  <button onclick="window.location.href='{% url 'login' %}'">Entrar</button>
-{% endif %}
-{% for produto in produtos %} <!-- puxa os produtos -->
-  <div onclick="window.location.href='{% url 'detail-produto' produto.pk %}'">
-    {{produto.nome}} <!-- nome do produto -->
-    {% if produto.imagem_principal %} <!-- verifica se há imagem -->
-      <img src="{{produto.imagem_principal.url}}" alt=""> <!-- mostra a imagem -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}La Belle Bijou - Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<div class="home-content">
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">logout</button>
+        </form>
+        <div class="welcome-message">
+            <h1>Teste de {{ user.username }}</h1>
+        </div>
     {% endif %}
-  </div>
-{% endfor %}
+
+    <div class="produtos-grid">
+        {% for produto in produtos %}
+            <div class="produto-card" onclick="window.location.href='{% url 'detalhe-produto' produto.pk %}'">
+                {% if produto.imagem_principal %}
+                    <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
+                {% else %}
+                    <img src="{% static 'img/produto-placeholder.jpg' %}" alt="Imagem não disponível">
+                {% endif %}
+                <h3>{{ produto.nome }}</h3>
+                <p class="preco">R$ {{ produto.preco }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
