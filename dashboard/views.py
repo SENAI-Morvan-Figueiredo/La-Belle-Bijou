@@ -1,10 +1,13 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from products.models import Produto, Categoria, MovimentacaoEstoque
+from accounts.models import CustomUser
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .forms import ProdutoForm, ImagemProdutoFormSet, CategoriaForm, MovimentacaoEstoqueForm
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Produtos =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 class ListaProdutosAdm(LoginRequiredMixin, UserPassesTestMixin, ListView): 
     model = Produto 
@@ -89,6 +92,9 @@ class DeletarProduto(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
     
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Categorias =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 class ListarCategorias(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Categoria
     template_name = "dashboard/adm_categoria.html"
@@ -172,5 +178,16 @@ class SaidaCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         form.instance.tipo = "SAIDA"
         return super().form_valid(form)
     
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Usuários =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+class ListaUsuarios(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = CustomUser
+    template_name = 'dashboard/adm_usuarios.html'
+    context_object_name = 'usuarios'
+
     def test_func(self):
         return self.request.user.is_superuser
