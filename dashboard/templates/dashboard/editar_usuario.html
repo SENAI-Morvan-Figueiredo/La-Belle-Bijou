@@ -1,0 +1,11 @@
+<div class="container mt-4">
+    <h2>Editar Usuário</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'usuarios-adm' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

@@ -1,9 +1,9 @@
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from products.models import Produto, Categoria, MovimentacaoEstoque
 from accounts.models import CustomUser
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .forms import ProdutoForm, ImagemProdutoFormSet, CategoriaForm, MovimentacaoEstoqueForm
+from .forms import ProdutoForm, ImagemProdutoFormSet, CategoriaForm, MovimentacaoEstoqueForm, UsuarioForm
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
@@ -188,6 +188,23 @@ class ListaUsuarios(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = CustomUser
     template_name = 'dashboard/adm_usuarios.html'
     context_object_name = 'usuarios'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+class DetalheUsuario(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = CustomUser
+    template_name = "dashboard/detalhe_usuario.html"
+    context_object_name = "usuario"
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+class EditarUsuario(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = CustomUser
+    form_class = UsuarioForm
+    template_name = "dashboard/editar_usuario.html"
+    success_url = reverse_lazy("usuarios-adm")
 
     def test_func(self):
         return self.request.user.is_superuser

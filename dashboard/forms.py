@@ -2,6 +2,9 @@ from django import forms
 from django.forms.models import inlineformset_factory
 from django.forms.widgets import ClearableFileInput
 from products.models import Produto, ImagemProduto, Categoria, MovimentacaoEstoque
+from accounts.models import CustomUser
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Produtos =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 class CustomClearableFileInput(ClearableFileInput):
     initial_text = "Imagem atual"
@@ -57,3 +60,20 @@ class MovimentacaoEstoqueForm(forms.ModelForm):
             self.fields["motivo"].choices = [ # define as opções do campo motivo
                 ("VENDA", "Venda para cliente"),
             ] 
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Usuarios =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ["first_name", "last_name", "email", "telefone", "cpf", "data_nasc", "is_active", "is_superuser"]
+        labels = {
+            "first_name": "Primeiro nome",
+            "last_name": "Último nome",
+            "data_nasc": "Data de nascimento"
+        }
+
+        help_texts = {
+            "is_active": None,
+            "is_superuser": None,
+        }

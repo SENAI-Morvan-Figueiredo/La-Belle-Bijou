@@ -12,7 +12,6 @@ class Cart:
         produto_id = str(produto.id) # transforma o id do produto em string (request.session só trabalha bem com chaves de texto)
         if produto_id not in self.cart: # se o produto não estiver no carrinho
             self.cart[produto_id] = { # adiciona as informações do produto
-                "id": produto.id,
                 "nome": produto.nome,
                 "quantidade": 0,
                 "preco": str(produto.preco),
@@ -42,7 +41,7 @@ class Cart:
     def __iter__(self): # função padrão do python que define como um objeto será tratado em um loop
         for produto_id, item in self.cart.items(): # percorre cada produto no carrinho
             item = item.copy()  # faz uma cópia de cada informação dos produtos
-            item["id"] = produto_id
+            item["id"] = int(produto_id)
             item["preco"] = Decimal(item["preco"])
             item["total"] = item["preco"] * item["quantidade"] # faz o calculo do preço total daquele produto de acordo com a quantidade
             yield item

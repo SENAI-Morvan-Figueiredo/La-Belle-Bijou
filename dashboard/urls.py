@@ -19,5 +19,7 @@ urlpatterns = [
     path('registrar-saida/', SaidaCreateView.as_view(), name="add-saida"),
 
     # usuarios
-    path('usuarios/', ListaUsuarios.as_view(), name="usuarios-adm")
+    path('usuarios/', ListaUsuarios.as_view(), name="usuarios-adm"),
+    path('usuarios/<int:pk>', DetalheUsuario.as_view(), name="detalhe-user" ),
+    path('upd-usuario/<int:pk>', EditarUsuario.as_view(), name="editar-user")
     ]

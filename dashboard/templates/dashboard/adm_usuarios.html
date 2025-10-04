@@ -1,8 +1,9 @@
 <h1>Painel - Lista de Usuários</h1>
 <ul>
     {% for usuario in usuarios %}
-        <li>{{ usuario.username }} - {{ usuario.email }}</li>
-        {% comment %} <button onclick="window.location.href='{% url 'upd-usuario' usuario.pk %}'">editar</button>
-        <button onclick="window.location.href='{% url 'deletar-usuario' usuario.pk %}'">excluir</button> {% endcomment %}
+        <div onclick="window.location.href='{% url 'detalhe-user' usuario.pk %}'">
+            <li>{{ usuario.username }} - {{ usuario.email }}</li>
+        </div>
+        <button onclick="window.location.href='{% url 'editar-user' usuario.pk %}'">editar</button>
      {% endfor %}
 </ul>
