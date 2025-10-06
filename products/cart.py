@@ -22,9 +22,6 @@ class Cart:
         else: # se o produto já estiver no carrinho adiciona 1 na quantidade
             self.cart[produto_id]["quantidade"] += quantidade
         
-        # CALCULA O TOTAL DO ITEM (FALTANDO)
-        self.cart[produto_id]["total"] = str(Decimal(self.cart[produto_id]["preco"]) * self.cart[produto_id]["quantidade"])
-        
         print(self.session["cart"])
         self.save() # salva na sessão
 

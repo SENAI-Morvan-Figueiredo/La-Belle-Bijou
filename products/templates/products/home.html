@@ -1,44 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}La Belle Bijou - Home{% endblock %}
+
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/carrinho.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
-{% block content %}
-<h2>Meu carrinho</h2>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Produto</th>
-      <th>Qtd</th>
-      <th>Preço</th>
-      <th>Total</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in cart %}
-        <tr>
-        <td>
-            <img src="{{ item.imagem }}" style="width:50px;"> 
-            {{ item.nome }}
-        </td>
-        <td>{{ item.quantidade }}</td>
-        <td>R$ {{ item.preco }}</td>
-        <td>R$ {{ item.total }}</td>
-        <td>
-            <a href="{% url 'remover_carrinho' item.id %}" class="btn btn-danger btn-sm">
-                Remover
-            </a>
-        </td>
-        </tr>
-    {% empty %}
-    <tr><td colspan="5">Seu carrinho está vazio</td></tr>
-    {% endfor %}
-    <button onclick="window.location.href='{% url 'limpar_carrinho' %}'">limpar carrinho</button>
-  </tbody>
-</table>
+{% block conteudo %}
+<div class="home-content">
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">logout</button>
+        </form>
+        <div class="welcome-message">
+            <h1>Teste de {{ user.username }}</h1>
+        </div>
+    {% endif %}
 
-<h3>Total: R$ {{ cart.get_total_price }}</h3>
+    <div class="produtos-grid">
+        {% for produto in produtos %}
+            <div class="produto-card" onclick="window.location.href='{% url 'detalhe-produto' produto.pk %}'">
+                {% if produto.imagem_principal %}
+                    <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
+                {% else %}
+                    <img src="{% static 'img/produto-placeholder.jpg' %}" alt="Imagem não disponível">
+                {% endif %}
+                <h3>{{ produto.nome }}</h3>
+                <p class="preco">R$ {{ produto.preco }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
