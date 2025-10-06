@@ -1,35 +1,122 @@
-<h2>Meu carrinho</h2>
-<table class="table">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/carrinho.css' %}">
+{% endblock %}
+
+{% block conteudo %}
+<h1>MEU CARRINHO</h1>
+
+<table class="cart-table">
   <thead>
     <tr>
-      <th>Produto</th>
-      <th>Qtd</th>
-      <th>Preço</th>
-      <th>Total</th>
+      <th>PRODUTO</th>
+      <th>QUANTIDADE</th>
+      <th>TOTAL</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     {% for item in cart %}
         <tr>
-        <td>
+        <td class="product-name">
             <img src="{{ item.imagem }}" style="width:50px;"> 
             {{ item.nome }}
         </td>
-        <td>{{ item.quantidade }}</td>
-        <td>R$ {{ item.preco }}</td>
-        <td>R$ {{ item.total }}</td>
-        <td>
-            <a href="{% url 'remover_carrinho' item.id %}" class="btn btn-danger btn-sm">
+        <td class="quantity">
+            <button type="button" onclick="updateQuantity('{{ item.id }}', -1)">-</button>
+            <span id="qty-{{ item.id }}">{{ item.quantidade }}</span>
+            <button type="button" onclick="updateQuantity('{{ item.id }}', 1)">+</button>
+        </td>
+        <td class="price">R$ <span id="total-{{ item.id }}">{{ item.total }}</span></td>
+        <td class="actions">
+            <a href="{% url 'remover_carrinho' item.id %}" class="remove-btn">
                 Remover
             </a>
         </td>
         </tr>
     {% empty %}
-    <tr><td colspan="5">Seu carrinho está vazio</td></tr>
+    <tr><td colspan="4" class="empty-cart">Seu carrinho está vazio</td></tr>
     {% endfor %}
-    <button onclick="window.location.href='{% url 'limpar_carrinho' %}'">limpar carrinho</button>
   </tbody>
 </table>
 
-<h3>Total: R$ {{ cart.get_total_price }}</h3>
+<button onclick="window.location.href='{% url 'limpar_carrinho' %}'" class="clear-btn">limpar carrinho</button>
+
+<div class="summary">
+    <table class="summary-table">
+        <tr>
+            <td>Subtotal</td>
+            <td>R$ <span id="subtotal">{{ cart.get_total_price }}</span></td>
+        </tr>
+        <tr>
+            <td>Entrega</td>
+            <td>R$ <span id="entrega">10.00</span></td>
+        </tr>
+        <tr class="total-row">
+            <td><strong>Total</strong></td>
+            <td><strong>R$ <span id="total-final">{{ cart.get_total_price }}</span></strong></td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+
+<div class="cart-actions">
+    <a href="{% url 'home' %}" class="action-link">Escolher mais produtos</a>
+    <a href="#" class="action-link primary">Continuar compra</a>
+</div>
+
+<hr>
+
+<footer>
+    <p>© 2025 Lu belle bijou – Todos os direitos reservados.</p>
+</footer>
+
+<script>
+function updateQuantity(itemId, change) {
+    const qtyElement = document.getElementById('qty-' + itemId);
+    let currentQty = parseInt(qtyElement.textContent);
+    const newQty = Math.max(1, currentQty + change);
+    
+    if (newQty !== currentQty) {
+        // Faz a requisição AJAX para atualizar no servidor
+        fetch("{% url 'atualizar_quantidade' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                'produto_id': itemId,
+                'quantidade': newQty
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Atualiza a quantidade visualmente
+                qtyElement.textContent = newQty;
+                // Atualiza o total do item
+                document.getElementById('total-' + itemId).textContent = data.item_total;
+                // Atualiza os totais do carrinho
+                document.getElementById('subtotal').textContent = data.cart_total;
+                document.getElementById('total-final').textContent = data.cart_total;
+                
+                // Se foi removido (quantidade = 0), recarrega
+                if (data.removed) {
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            window.location.reload();
+        });
+    }
+}
+</script>
+{% endblock %}
