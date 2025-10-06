@@ -1,6 +1,9 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 header {
@@ -109,7 +112,4 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
 }

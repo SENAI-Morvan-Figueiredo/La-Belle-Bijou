@@ -77,6 +77,7 @@
         height: 5vh;
         opacity: 1;
         background-color: #252A36;
+        margin-top: 1vh;
 
         & p {
             font-size: 1.3rem;
@@ -117,7 +118,7 @@
     width: 90vw;
     color: #757575;
     border-bottom: 3px solid #757575;
-    margin: auto;
+    margin: 3vh auto auto auto;
 }
 
 #footer_tela_principal {
