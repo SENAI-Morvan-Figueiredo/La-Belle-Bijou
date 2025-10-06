@@ -18,9 +18,9 @@
 .produtos-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    gap: 1rem;
     padding: 0 2rem;
-    max-width: 100vw;
+    max-width: 90vw;
     margin: 0 auto;
 }
 
@@ -32,25 +32,56 @@
     background-color: #fff;
     margin-top: 3vh;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+    & img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+
+    & h3 {
+        color: #252A36;
+        margin-bottom: 0.5rem;
+        font-weight: normal;
+        font-size: 1.1rem;
+    }
+
+    & button {
+        position: relative;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        border-radius: 10px;
+        transition: width 0.1s, height 0.1s;
+        display: flex;
+        justify-self: center;
+        justify-content: center;
+
+        & p {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0;
+            color: #fff;
+        }
+    }
 }
 
 .produto-card:hover {
     transform: translateY(-5px);
-}
 
-.produto-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
+    & button {
+        width: 80%;
+        height: 5vh;
+        opacity: 1;
+        background-color: #252A36;
 
-.produto-card h3 {
-    color: #252A36;
-    margin-bottom: 0.5rem;
-    font-weight: normal;
-    font-size: 1.1rem;
+        & p {
+            font-size: 1.3rem;
+        }
+    }
 }
 
 .preco {
