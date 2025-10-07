@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard Admin - La Belle Bijou{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Spectral:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS do painel -->
+    <link rel="stylesheet" href="{% static 'css/base_adm.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+</head>
+
+<body>
+<div class="admin-panel">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="{% static 'img/logo.png' %}" alt="Logo La Belle Bijou">
+        </div>
+        <p class="welcome-message">Bem-vindo, {{ request.user.first_name|default:'Admin' }}</p>
+
+        <nav class="navigation">
+            <ul>
+                <li><a href="{% url 'produtos-adm' %}" class="{% if request.resolver_match.url_name == 'produtos-adm' %}active{% endif %}">Produtos</a></li>
+                <li><a href="{% url 'categorias-adm' %}" class="{% if request.resolver_match.url_name == 'categorias-adm' %}active{% endif %}">Categorias</a></li>
+                <li><a href="{% url 'usuarios-adm' %}" class="{% if request.resolver_match.url_name == 'usuarios-adm' %}active{% endif %}">Usuários</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <header class="main-header">
+            <h1>{% block header_title %}Gerenciar{% endblock %}</h1>
+            <p>{% block header_desc %}Verifique as informações abaixo{% endblock %}</p>
+            {% block extra %}{% endblock %}
+        </header>
+
+        <section class="content-area">
+            {% block conteudo %}
+            {% endblock %}
+        </section>
+
+        <footer class="main-footer">
+            <p>&copy; 2025 La Belle Bijou — Todos os direitos reservados.</p>
+        </footer>
+    </main>
+</div>
+</body>
+</html>

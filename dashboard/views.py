@@ -82,15 +82,6 @@ class UpdateProduto(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def test_func(self):
         return self.request.user.is_superuser
-
-  
-class DeletarProduto(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Produto
-    template_name = "dashboard/deletar_produto.html" 
-    success_url = reverse_lazy("produtos-adm")
-
-    def test_func(self):
-        return self.request.user.is_superuser
     
 
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Categorias =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

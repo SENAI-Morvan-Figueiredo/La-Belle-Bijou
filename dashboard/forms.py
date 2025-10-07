@@ -14,9 +14,12 @@ class CustomClearableFileInput(ClearableFileInput):
 class ProdutoForm(forms.ModelForm):
     class Meta:
         model = Produto
-        fields = ["nome", "descricao", "preco", "categorias", "imagem_principal"]
+        fields = ["nome", "descricao", "preco", "categorias", "is_active", "imagem_principal"]
         widgets = {
             "imagem_principal": CustomClearableFileInput
+        }
+        labels = {
+            "is_active": "Ativo"
         }
 
     categorias = forms.ModelMultipleChoiceField( # campo categorias é sobrescrito para personalização

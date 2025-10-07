@@ -1,0 +1,102 @@
+.table-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #b5b5b5 #f1f1f1;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #b5b5b5;
+    border-radius: 4px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #333;
+    table-layout: auto;
+}
+
+.admin-table thead {
+    background-color: #e4e4e4;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.admin-table th {
+    font-weight: 600;
+    color: #555;
+}
+
+.admin-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #e4e4e4;
+    z-index: 2;
+}
+
+.admin-table th:first-child,
+.admin-table td:first-child {
+    text-align: left;
+    width: 80px;
+}
+
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2) {
+    text-align: center;
+}
+
+.admin-table th:last-child,
+.admin-table td:last-child {
+    text-align: right;
+    width: 120px;
+}
+
+.edit-icon,
+.delete-icon {
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+    color: #007bff;
+}
+
+.delete-icon:hover {
+    color: #e74c3c;
+}
+
+.add-button {
+    background-color: #D4AC6E;
+    color: #202A3A;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #c89f5e;
+}
