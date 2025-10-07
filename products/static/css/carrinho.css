@@ -1,73 +1,210 @@
-/* Estilos para transformar na foto 2 */
-h2 {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    text-transform: uppercase;
+/* =================== GERAL =================== */
+body {
+  background-color: #f3f3f3;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background: white;
+/* =================== TÍTULO =================== */
+h1 {
+  font-size: 1.2rem;
+  color: #4b4b4b;
+  text-transform: uppercase;
+  margin: 40px 0 20px 50px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.table th {
-    background-color: #f8f9fa;
-    padding: 15px 10px;
-    text-align: left;
-    font-weight: bold;
-    border-bottom: 2px solid #ddd;
-    text-transform: uppercase;
+/* =================== TABELA DO CARRINHO =================== */
+.cart-table {
+  width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-.table td {
-    padding: 15px 10px;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
+.cart-table thead {
+  background-color: #252A36;
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
-.table img {
-    margin-right: 10px;
-    vertical-align: middle;
+.cart-table th {
+  text-align: center;
+  padding: 14px;
 }
 
-.btn-danger {
-    background: #dc3545;
-    color: white;
-    padding: 8px 15px;
-    text-decoration: none;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
+.cart-table th:first-child {
+  text-align: left;
+  padding-left: 20px;
 }
 
-.btn-danger:hover {
-    background: #c82333;
-    color: white;
+.cart-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e1e1e1;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.95rem;
 }
 
-button {
-    background: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    cursor: pointer;
-    border-radius: 4px;
+/* =================== PRODUTO =================== */
+.product-name {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
 }
 
-button:hover {
-    background: #545b62;
+.product-name img {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  object-fit: cover;
 }
 
-h3 {
-    text-align: right;
-    font-size: 20px;
-    margin: 20px 0;
-    padding: 15px;
-    background: #f8f9fa;
-    border-top: 2px solid #ddd;
+/* =================== QUANTIDADE =================== */
+.quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity button {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #252A36;
+  transition: 0.3s ease;
+}
+
+.quantity button:hover {
+  background-color: #252A36;
+  color: white;
+}
+
+.quantity span {
+  font-weight: 500;
+}
+
+/* =================== PREÇO =================== */
+.price {
+  font-weight: 500;
+}
+
+/* =================== BOTÃO REMOVER =================== */
+.remove-btn {
+  background-color: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* =================== BOTÃO LIMPAR =================== */
+.clear-btn {
+  margin: 25px 0 0 5%;
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.clear-btn:hover {
+  text-decoration: underline;
+}
+
+/* =================== RESUMO (Subtotal / Entrega / Total) =================== */
+.summary {
+  display: flex;
+  justify-content: flex-end;
+  margin: 40px 5% 0 0;
+}
+
+.summary-table {
+  background: white;
+  border-radius: 10px;
+  width: 320px;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-table td {
+  padding: 15px 25px;
+  font-size: 0.95rem;
+  color: #777;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.summary-table tr:last-child td {
+  border-bottom: none;
+}
+
+.summary-table tr.total-row td {
+  font-weight: bold;
+  color: #252A36;
+}
+
+/* =================== BOTÕES FINAIS =================== */
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 40px auto;
+}
+
+.action-link {
+  background-color: #252A36;
+  color: white;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.action-link:hover {
+  background-color: #1d202b;
+}
+
+/* =================== RESPONSIVIDADE =================== */
+@media (max-width: 768px) {
+  .cart-table th, .cart-table td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .cart-actions {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .summary {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  .summary-table {
+    width: 90%;
+  }
 }
