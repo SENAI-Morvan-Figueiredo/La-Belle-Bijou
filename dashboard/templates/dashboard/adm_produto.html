@@ -13,7 +13,7 @@
 <div class="toolbar">
     <form method="get" id="filtro-form" class="filter-container">
         <div class="search-container">
-            <input type="text" name="pesquisa" placeholder="Pesquisar..." value="{{ request.GET.q }}">
+            <input type="text" name="pesquisa" placeholder="Pesquisar..." value="{{ request.GET.pesquisa }}">
         </div>
 
         <select name="status" class="status-select" onchange="document.getElementById('filtro-form').submit()">

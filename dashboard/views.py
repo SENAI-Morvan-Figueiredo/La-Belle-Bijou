@@ -110,6 +110,16 @@ class ListarCategorias(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def test_func(self):
         return self.request.user.is_superuser
     
+    def get_queryset(self): # método padrão do django para filtragem
+        queryset = super().get_queryset()
+
+        pesquisa = self.request.GET.get('pesquisa')
+
+        if pesquisa:
+            queryset = queryset.filter(nome__icontains=pesquisa)
+
+        return queryset
+    
 class CriarCategoria(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Categoria
     template_name = "dashboard/criar_categoria.html"
@@ -198,6 +208,22 @@ class ListaUsuarios(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def test_func(self):
         return self.request.user.is_superuser
+    
+    def get_queryset(self): # método padrão do django para filtragem
+        queryset = super().get_queryset()
+
+        status = self.request.GET.get('status')
+        pesquisa = self.request.GET.get('pesquisa')
+
+        if status == 'ativo':
+            queryset = queryset.filter(is_active=True)
+        elif status == 'inativo':
+            queryset = queryset.filter(is_active=False)
+
+        if pesquisa:
+            queryset = queryset.filter(username__icontains=pesquisa)
+
+        return queryset
     
 class DetalheUsuario(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = CustomUser

@@ -1,9 +1,67 @@
-<h1>Painel - Lista de Usuários</h1>
-<ul>
-    {% for usuario in usuarios %}
-        <div onclick="window.location.href='{% url 'detalhe-user' usuario.pk %}'">
-            <li>{{ usuario.username }} - {{ usuario.email }}</li>
+{% extends 'dashboard/base_adm.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/adm_usuarios.css' %}">
+{% endblock %}
+
+{% block title %}Gerenciar Usuários - La Belle Bijou{% endblock %}
+{% block header_title %}Gerenciar Usuários{% endblock %}
+{% block header_desc %}Verifique as informações abaixo{% endblock %}
+
+{% block extra %}
+<div class="toolbar">
+    <form method="get" id="filtro-form" class="filter-container">
+        <div class="search-container">
+            <input type="text" name="pesquisa" placeholder="Pesquisar..." value="{{ request.GET.pesquisa }}">
         </div>
-        <button onclick="window.location.href='{% url 'editar-user' usuario.pk %}'">editar</button>
-     {% endfor %}
-</ul>
+
+        <select name="status" class="status-select" onchange="document.getElementById('filtro-form').submit()">
+            <option value="">Todos</option>
+            <option value="ativo" {% if request.GET.status == 'ativo' %}selected{% endif %}>Ativo</option>
+            <option value="inativo" {% if request.GET.status == 'inativo' %}selected{% endif %}>Inativo</option>
+        </select>
+    </form>
+
+    <div class="button-group">
+        {% comment %} <a href="{% url 'criar-user' %}" class="add-button">Novo Usuário</a> {% endcomment %}
+    </div>
+</div>
+{% endblock %}
+
+{% block conteudo %}
+<div class="table-container">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome de Usuário</th>
+                <th>Email</th>
+                <th>Ativo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr onclick="window.location.href='{% url 'detalhe-user' usuario.pk %}'" class="clickable-row">
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>
+                    {% if usuario.is_active %}
+                        <span class="status ativo">Ativo</span>
+                    {% else %}
+                        <span class="status inativo">Inativo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'editar-user' usuario.pk %}" class="edit-icon">✎</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">Nenhum usuário encontrado</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

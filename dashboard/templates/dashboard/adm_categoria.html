@@ -11,9 +11,11 @@
 
 {% block extra %}
 <div class="toolbar">
-    <div class="search-container">
-        <input type="text" placeholder="Pesquisar...">
-    </div>
+    <form method="get" id="filtro-form" class="filter-container">
+        <div class="search-container">
+            <input type="text" name="pesquisa" placeholder="Pesquisar..." value="{{ request.GET.pesquisa }}">
+        </div>
+    </form>
     <a href="{% url 'add-categoria' %}" class="add-button">
         Nova Categoria
     </a>

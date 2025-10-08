@@ -100,3 +100,13 @@
 .add-button:hover {
     background-color: #c89f5e;
 }
+
+.search-container input {
+    width: 500px;
+    padding: 10px 12px 10px 38px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f6f6f6;
+    outline: none;
+}

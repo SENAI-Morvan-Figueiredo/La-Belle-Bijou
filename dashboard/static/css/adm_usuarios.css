@@ -1,0 +1,148 @@
+/* ======= TABELA DE USUÁRIOS ======= */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #333;
+}
+
+.admin-table thead {
+    background-color: #e4e4e4;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+    font-weight: 600;
+    color: #555;
+}
+
+.admin-table tbody {
+    background-color: #fff;
+}
+
+.table-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #b5b5b5 #f1f1f1;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #b5b5b5;
+    border-radius: 4px;
+}
+
+/* ======= STATUS ======= */
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.status.ativo {
+    color: #2ecc71;
+}
+
+.status.inativo {
+    color: #e74c3c;
+}
+
+/* ======= ÍCONES ======= */
+.edit-icon {
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    margin-left: 8px;
+    transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+    color: #007bff;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10vw;
+    flex-direction: row;
+}
+
+.search-container input {
+    width: 500px;
+    padding: 10px 12px 10px 38px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f6f6f6;
+    outline: none;
+}
+
+.status-select {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f6f6f6;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.status-select:hover {
+    background-color: #ebebeb;
+}
+
+/* ======= BOTÕES ======= */
+.add-button {
+    background-color: #D4AC6E;
+    color: #202A3A;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #c89f5e;
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.clickable-row:hover {
+    background-color: #f2f2f2;
+}
