@@ -36,7 +36,7 @@ header {
         border-radius: 10px;
         padding: 0 5px 0 5px;
         text-decoration: none;
-        font-size: 1rem;
+        font-size: 1.3rem;
         display: flex;
         align-items: center;
     }
@@ -109,6 +109,7 @@ footer {
     height: 9vh;
     background-color: #fff;
     color: #9D9D9D;
+    font-size: 1.3rem;
     display: flex;
     justify-content: center;
     align-items: center;

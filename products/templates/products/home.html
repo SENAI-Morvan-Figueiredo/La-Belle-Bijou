@@ -29,10 +29,10 @@
       <img src="{% static 'img/lbb_banner_1.png' %}" class="d-block imgs-menores" alt="banner-1">
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block imgs-menores" alt="banner-2">
+      <img src="{% static 'img/lbb_banner_2.png' %}" class="d-block imgs-menores" alt="banner-2">
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block imgs-menores" alt="banner-3">
+      <img src="{% static 'img/lbb_banner_3.png' %}" class="d-block imgs-menores" alt="banner-3">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -61,59 +61,27 @@
           </div>
       {% endfor %}
   </div> -->
-<div class="carousel-container">
-  <button class="carousel-btn prev">&#10094;</button>
+  <div class="carousel-container">
+    <button class="carousel-btn prev">&#10094;</button>
 
-  <div class="carousel-track">
-    <div class="produtos-grid">
+    <div class="carousel-track">
       {% for produto in produtos %}
-          <div class="produto-card" onclick="window.location.href='{% url 'detalhe-produto' produto.pk %}'">
-              {% if produto.imagem_principal %}
-                  <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
-              {% else %}
-                  <img src="{% static 'img/produto-placeholder.jpg' %}" alt="Imagem não disponível">
-              {% endif %}
-              <h3>{{ produto.nome }}</h3>
-              <p class="preco">R$ {{ produto.preco }}</p>
-              <button onclick="window.location.href='{% url 'teste-carrinho' %}'"><p>Adicionar ao carrinho</p></button>
-          </div>
+        <div class="produto-card" onclick="window.location.href='{% url 'detalhe-produto' produto.pk %}'">
+          {% if produto.imagem_principal %}
+            <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
+          {% else %}
+            <img src="{% static 'img/produto-placeholder.jpg' %}" alt="Imagem não disponível">
+          {% endif %}
+          <h3>{{ produto.nome }}</h3>
+          <p class="preco">R$ {{ produto.preco }}</p>
+          <button onclick="window.location.href='{% url 'teste-carrinho' %}'"><p>Adicionar ao carrinho</p></button>
+        </div>
       {% endfor %}
     </div>
+
+    <button class="carousel-btn next">&#10095;</button>
   </div>
-
-  <button class="carousel-btn next">&#10095;</button>
-</div>
 </div>
 
-<!-- <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const track = document.querySelector('.carousel-track');
-  const items = Array.from(document.querySelectorAll('.carousel-item'));
-  const prevBtn = document.querySelector('.carousel-btn.prev');
-  const nextBtn = document.querySelector('.carousel-btn.next');
-
-  let currentIndex = 0;
-  const itemsPerSlide = 2; // desliza 2 por clique
-
-  function updateCarousel() {
-    const itemWidth = items[0].offsetWidth + 16; // inclui gap
-    const moveX = itemWidth * currentIndex;
-    track.style.transform = `translateX(-${moveX}px)`;
-  }
-
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex + itemsPerSlide < items.length) {
-      currentIndex += itemsPerSlide;
-      updateCarousel();
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex - itemsPerSlide >= 0) {
-      currentIndex -= itemsPerSlide;
-      updateCarousel();
-    }
-  });
-});
-</script> -->
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

@@ -16,13 +16,12 @@
 }
 
 .produtos-grid {
-    gap: 5rem;
-    padding: 0 2rem;
     max-width: 75vw;
     margin: 0 auto;
 }
 
 .produto-card {
+    box-sizing: border-box;
     border-radius: 8px;
     padding: 1.3rem;
     cursor: pointer;
@@ -44,10 +43,6 @@
         margin-top: 1.5rem;
         font-weight: normal;
         font-size: 1.6rem;
-    }
-
-    & p {
-        font-size: 1.2rem;
     }
 
     & button {
@@ -131,55 +126,41 @@
     }
 }
 
-/* === Carrossel base === */
 .carousel-container {
     position: relative;
     width: 90vw;
-    margin: 4vh auto;
-    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
 }
 
 .carousel-track {
+    width: 80vw;
     display: flex;
     transition: transform 0.5s ease;
-    margin-bottom: 2vh;
+    padding: 2rem;
+    gap: 8rem;
+    overflow: hidden;
 }
 
 .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 3rem;
-    cursor: pointer;
-    z-index: 10;
     width: 5rem;
     height: 5rem;
+    background: #00000080;
+    font-size: 3rem;
+    color: #ffffff;
+    border: none;
     border-radius: 50%;
+    margin: auto;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
     transition: background 0.3s, transform 0.2s;
 }
 
 .carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-btn.prev {
-    left: 1rem;
-}
-
-.carousel-btn.next {
-    right: 1rem;
-}
-
-/* === Ajuste da grid === */
-.carousel-track .produtos-grid {
-    display: flex;
-    gap: 5rem;
-    transition: transform 0.5s ease;
+    background: #000000b3;
+    transform: scale(1.1);
 }

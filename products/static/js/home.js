@@ -1,23 +1,46 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const track = document.querySelector('.carousel-track .produtos-grid');
+document.addEventListener("DOMContentLoaded", function() {
+  const track = document.querySelector('.carousel-track');
+  const items = Array.from(document.querySelectorAll('.produto-card'));
   const prevBtn = document.querySelector('.carousel-btn.prev');
   const nextBtn = document.querySelector('.carousel-btn.next');
+  
+  let currentIndex = 0;
+  let itemsPerView = 4; // padrão desktop
+  const moveBy = 2; // desliza 2 por clique
 
-  const cardWidth = document.querySelector('.produto-card').offsetWidth + 80; // largura + gap
-  let position = 0;
+  function updateItemsPerView() {
+    const width = window.innerWidth;
+    if (width <= 700) itemsPerView = 2;
+    else if (width <= 1000) itemsPerView = 3;
+    else itemsPerView = 4;
+  }
 
-  // Ao clicar em "next", o carrossel vai para a esquerda (mostra novos itens à direita)
+  function updateCarousel() {
+    const itemWidth = items[0].offsetWidth + 80; // soma o gap (aprox. 2rem)
+    const moveX = currentIndex * itemWidth;
+    track.style.transform = `translateX(-${moveX}px)`;
+  }
+
   nextBtn.addEventListener('click', () => {
-    const maxScroll = -(track.scrollWidth - track.parentElement.offsetWidth);
-    position -= cardWidth * 2; // move 2 produtos por vez
-    if (position < maxScroll) position = maxScroll;
-    track.style.transform = `translateX(${position}px)`;
+    updateItemsPerView();
+    if (currentIndex + moveBy < items.length - itemsPerView + 1) {
+      currentIndex += moveBy;
+      updateCarousel();
+    }
   });
 
-  // Ao clicar em "prev", o carrossel vai para a direita (volta para itens anteriores)
   prevBtn.addEventListener('click', () => {
-    position += cardWidth * 2;
-    if (position > 0) position = 0;
-    track.style.transform = `translateX(${position}px)`;
+    updateItemsPerView();
+    if (currentIndex - moveBy >= 0) {
+      currentIndex -= moveBy;
+      updateCarousel();
+    }
   });
+
+  window.addEventListener('resize', () => {
+    updateItemsPerView();
+    updateCarousel();
+  });
+
+  updateItemsPerView();
 });
