@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/adm_produto.css' %}">
+<link rel="stylesheet" href="{% static 'css/adm_produto.css' %}">
 {% endblock %}
 
 {% block title %}Gerenciar Produtos - La Belle Bijou{% endblock %}
@@ -11,14 +11,23 @@
 
 {% block extra %}
 <div class="toolbar">
-    <div class="search-container">
-        <input type="text" placeholder="Pesquisar...">
+    <form method="get" id="filtro-form" class="filter-container">
+        <div class="search-container">
+            <input type="text" name="pesquisa" placeholder="Pesquisar..." value="{{ request.GET.q }}">
+        </div>
+
+        <select name="status" class="status-select" onchange="document.getElementById('filtro-form').submit()">
+            <option value="">Todos</option>
+            <option value="ativo" {% if request.GET.status == 'ativo' %}selected{% endif %}>Ativo</option>
+            <option value="inativo" {% if request.GET.status == 'inativo' %}selected{% endif %}>Inativo</option>
+        </select>
+    </form>
+
+    <div class="button-group">
+        <a href="{% url 'add-entrada' %}" class="add-button">Adicionar Entrada</a>
+        <a href="{% url 'add-saida' %}" class="add-button">Adicionar Saída</a>
+        <a href="{% url 'add-produto' %}" class="add-button">Novo Item</a>
     </div>
-    <a href="{% url 'add-entrada' %}" class="add-button">Adicionar Entrada</a>
-    <a href="{% url 'add-saida' %}" class="add-button">Adicionar Saída</a>
-    <a href="{% url 'add-produto' %}" class="add-button">
-        Novo Item
-    </a>
 </div>
 {% endblock %}
 
@@ -39,16 +48,22 @@
         <tbody>
             {% for produto in produtos %}
             <tr>
-                {% if produto.imagem_principal%}
+                {% if produto.imagem_principal %}
                     <td><img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}"> {{ produto.nome }}</td>
                 {% else %}
-                    <td><p>produto sem imagem - {{produto.nome}}</p></td>
-                {%endif%}
+                    <td><p>produto sem imagem - {{ produto.nome }}</p></td>
+                {% endif %}
                 <td>{{ produto.id }}</td>
                 <td>{% for c in produto.categorias.all %}{{ c.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
                 <td>R${{ produto.preco }}</td>
                 <td>{{ produto.estoque_atual }}</td>
-                <td>{% if produto.is_active %}<span class="status ativo">Ativo</span>{% else %}<span class="status inativo">Inativo</span>{% endif %}</td>
+                <td>
+                    {% if produto.is_active %}
+                        <span class="status ativo">Ativo</span>
+                    {% else %}
+                        <span class="status inativo">Inativo</span>
+                    {% endif %}
+                </td>
                 <td><a href="{% url 'upd-produto' produto.id %}" class="edit-icon">✎</a></td>
             </tr>
             {% empty %}

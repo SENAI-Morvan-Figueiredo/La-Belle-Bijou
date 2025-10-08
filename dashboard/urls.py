@@ -8,7 +8,7 @@ urlpatterns = [
     path('upd-produto/<int:pk>/', UpdateProduto.as_view(), name="upd-produto"),
 
     # categorias
-    path('categorias/', ListarCategorias.as_view(), name="categorias-adm"),
+    path('categorias/', ListarCategorias.as_view(), name="categorias-adm"), 
     path('add-categoria/', CriarCategoria.as_view(), name="add-categoria"),
     path('upd-categoria/<int:pk>', UpdateCategoria.as_view(), name="upd-categoria"),
     path('delete-categoria/<int:pk>', DeletarCategoria.as_view(), name="deletar-categoria"),

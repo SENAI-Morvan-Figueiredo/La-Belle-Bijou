@@ -14,6 +14,9 @@
             {% csrf_token %}
             <button type="submit">logout</button>
         </form>
+        {% if user.is_superuser %}
+            <button onclick="window.location.href='{% url 'produtos-adm' %}'"> Tela de Adm </button>
+        {% endif %}
         <div class="welcome-message">
             <h1>Teste de {{ user.username }}</h1>
         </div>
