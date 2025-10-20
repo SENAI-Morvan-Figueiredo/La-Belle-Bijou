@@ -1,7 +1,7 @@
-/* =================== GERAL =================== */
+ /* =================== GERAL =================== */
 body {
-  background-color: #f3f3f3;
-  font-family: "Poppins", sans-serif;
+  background-color: #EDEDED;
+  font-family: 'Alata', sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
@@ -10,13 +10,12 @@ body {
 /* =================== TÍTULO =================== */
 h1 {
   font-size: 1.2rem;
-  color: #4b4b4b;
+  color: #767676;
   text-transform: uppercase;
   margin: 40px 0 20px 50px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  font-weight: 100;
 }
-
 /* =================== TABELA DO CARRINHO =================== */
 .cart-table {
   width: 90%;
@@ -61,8 +60,8 @@ h1 {
 }
 
 .product-name img {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 5px;
   object-fit: cover;
 }
@@ -73,6 +72,7 @@ h1 {
   justify-content: center;
   align-items: center;
   gap: 8px;
+  margin-bottom: 12px;
 }
 
 .quantity button {
@@ -94,7 +94,9 @@ h1 {
 
 .quantity span {
   font-weight: 500;
+  text-align: center; /* Garante que o número fique sempre centralizado */
 }
+
 
 /* =================== PREÇO =================== */
 .price {
@@ -106,7 +108,7 @@ h1 {
   background-color: transparent;
   border: 1px solid #dc3545;
   color: #dc3545;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border-radius: 5px;
   font-size: 0.85rem;
   text-decoration: none;
@@ -182,29 +184,18 @@ h1 {
   font-weight: 500;
   transition: 0.3s;
 }
-
+ 
 .action-link:hover {
   background-color: #1d202b;
 }
 
-/* =================== RESPONSIVIDADE =================== */
-@media (max-width: 768px) {
-  .cart-table th, .cart-table td {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
 
-  .cart-actions {
-    flex-direction: column;
-    gap: 20px;
-  }
+.total-actions {
+  text-align: center;
+  font-weight: 500;
+}
 
-  .summary {
-    justify-content: center;
-    margin-right: 0;
-  }
-
-  .summary-table {
-    width: 90%;
-  }
+.total-actions span {
+  display: block; 
+  margin-bottom: 8px;
 }

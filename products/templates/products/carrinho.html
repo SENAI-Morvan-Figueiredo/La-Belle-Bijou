@@ -3,72 +3,83 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/carrinho.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block conteudo %}
 <h1>MEU CARRINHO</h1>
 
-<table class="cart-table">
-  <thead>
-    <tr>
-      <th>PRODUTO</th>
-      <th>VALOR</th>
-      <th>TOTAL</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="cart-body">
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th class="product-col">Produto</th>
+                <th class="price-col">Valor</th>
+                <th class="quantity-col">Quantidade</th>
+                <th class="total-col">Total</th>
+            </tr>
+        </thead>
+    <tbody>
     {% for item in cart %}
         <tr>
-        <td class="product-name">
-            <img src="{{ item.imagem }}" style="width:50px;"> 
-            {{ item.nome }}
-        </td>
-        <td class="quantity">
-            <button type="button" onclick="updateQuantity('{{ item.id }}', -1)">-</button>
-            <span id="qty-{{ item.id }}">{{ item.quantidade }}</span>
-            <button type="button" onclick="updateQuantity('{{ item.id }}', 1)">+</button>
-        </td>
-        <td class="price">R$ <span id="total-{{ item.id }}">{{ item.total }}</span></td>
-        <td class="actions">
-            <a href="{% url 'remover_carrinho' item.id %}" class="remove-btn">
-                Remover
-            </a>
-        </td>
+            <td class="product-name">
+                <img src="{{ item.imagem }}">
+                {{ item.nome }}
+            </td>
+
+            <td class="price">
+                R$ {{ item.preco }}
+            </td>
+
+            <td>
+                <div class="quantity">
+                    <button type="button" onclick="updateQuantity('{{ item.id }}', -1)">-</button>
+                    <span id="qty-{{ item.id }}">{{ item.quantidade }}</span>
+                    <button type="button" onclick="updateQuantity('{{ item.id }}', 1)">+</button>
+                </div>
+                <a href="{% url 'remover_carrinho' item.id %}" class="remove-btn">
+                    Remover
+                </a>
+            </td>
+
+            <td class="price">
+                R$ <span id="total-{{ item.id }}">{{ item.total }}</span>
+            </td>
         </tr>
     {% empty %}
-    <tr><td colspan="4" class="empty-cart">Seu carrinho está vazio</td></tr>
+        <tr><td colspan="4" class="empty-cart">Seu carrinho está vazio</td></tr>
     {% endfor %}
-  </tbody>
-</table>
-
-<button onclick="window.location.href='{% url 'limpar_carrinho' %}'" class="clear-btn">limpar carrinho</button>
-
-<div class="summary">
-    <table class="summary-table">
-        <tr>
-            <td>Subtotal</td>
-            <td>R$ <span id="subtotal">{{ cart.get_total_price }}</span></td>
-        </tr>
-        <tr>
-            <td>Entrega</td>
-            <td>R$ <span id="entrega">10.00</span></td>
-        </tr>
-        <tr class="total-row">
-            <td><strong>Total</strong></td>
-            <td><strong>R$ <span id="total-final">{{ cart.get_total_price }}</span></strong></td>
-        </tr>
+</tbody>
     </table>
+
+    <button onclick="window.location.href='{% url 'limpar_carrinho' %}'" class="clear-btn">limpar carrinho</button>
+
+    <div class="summary">
+        <table class="summary-table">
+            <tr>
+                <td>Subtotal</td>
+                <td>R$ <span id="subtotal">{{ cart.get_total_price }}</span></td>
+            </tr>
+            <tr>
+                <td>Entrega</td>
+                <td>R$ <span id="entrega">10.00</span></td>
+            </tr>
+            <tr class="total-row">
+                <td><strong>Total</strong></td>
+                <td><strong>R$ <span id="total-final">{{ cart.get_total_price }}</span></strong></td>
+            </tr>
+        </table>
+    </div>
 </div>
 
-<hr>
 
 <div class="cart-actions">
     <a href="{% url 'home' %}" class="action-link">Escolher mais produtos</a>
     <a href="#" class="action-link primary">Continuar compra</a>
 </div>
 
-<hr>
 
 <script>
 function updateQuantity(itemId, change) {
